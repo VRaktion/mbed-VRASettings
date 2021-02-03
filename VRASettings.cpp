@@ -2,32 +2,32 @@
 
 VRASettings::VRASettings(UUID *p_uuid, EventQueue *p_eq, StateChain *p_stateChain,
                          VRAStorage *p_storage)
-    : BLEService("settings", p_uuid, (uint8_t)COUNT, p_eq, p_stateChain), eq(p_eq), storage(p_storage) {}
+    : BLEService("settings", p_uuid, p_eq, p_stateChain), eq(p_eq), storage(p_storage) {}
 
 void VRASettings::initCharacteristics()
 {
 
     printf("settings uuid f03de978-d217-478c-a106-8e1b65165100\r\n");
 
-    // TEMPERATURE, HUMIDITY, PRESSURE, BRIGHTNESS, COUNT
-    this->initCharacteristic(SETTINGS, 0xFF00,
-                             GattCharacteristic::BLE_GATT_CHAR_PROPERTIES_READ,
-                             8); // 8x char
+    // // TEMPERATURE, HUMIDITY, PRESSURE, BRIGHTNESS, COUNT
+    // this->initCharacteristic(SETTINGS, 0xFF00,
+    //                          GattCharacteristic::BLE_GATT_CHAR_PROPERTIES_READ,
+    //                          8); // 8x char
 
-    this->initCharacteristic(APP_ID, 0xFF01,
-                             GattCharacteristic::BLE_GATT_CHAR_PROPERTIES_READ |
-                                 GattCharacteristic::BLE_GATT_CHAR_PROPERTIES_WRITE,
-                             APP_ID_LENGTH);
-    this->setAppIdWriteCb = callback(this, &VRASettings::setAppIdBle);
-    this->setWriteCallback(APP_ID, &this->setAppIdWriteCb);
+    // this->initCharacteristic(APP_ID, 0xFF01,
+    //                          GattCharacteristic::BLE_GATT_CHAR_PROPERTIES_READ |
+    //                              GattCharacteristic::BLE_GATT_CHAR_PROPERTIES_WRITE,
+    //                          APP_ID_LENGTH);
+    // this->setAppIdWriteCb = callback(this, &VRASettings::setAppIdBle);
+    // this->setWriteCallback(APP_ID, &this->setAppIdWriteCb);
 
-    this->initCharacteristic(
-        LOG, 0xFF02,
-        GattCharacteristic::BLE_GATT_CHAR_PROPERTIES_READ |
-            GattCharacteristic::BLE_GATT_CHAR_PROPERTIES_NOTIFY,
-        20);
+    // this->initCharacteristic(
+    //     LOG, 0xFF02,
+    //     GattCharacteristic::BLE_GATT_CHAR_PROPERTIES_READ |
+    //         GattCharacteristic::BLE_GATT_CHAR_PROPERTIES_NOTIFY,
+    //     20);
 
-    this->initService();
+    // this->initService();
 }
 
 void VRASettings::init()
